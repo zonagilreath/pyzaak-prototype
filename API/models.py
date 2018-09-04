@@ -14,7 +14,7 @@ class Profile(models.Model):
             (5, 'Force User')
         )
 
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    user = models.OneToOneField(User, on_delete=models.CASCADE, primary_key=True)
     total_xp = models.IntegerField(default=0)
     rank = models.IntegerField(choices=RANK_CHOICES, default=0)
     games_played = models.IntegerField(default=0)
