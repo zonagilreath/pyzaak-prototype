@@ -1,9 +1,11 @@
 from rest_framework import serializers
+from django.contrib.auth.models import User
+from . import models
 
 
 class ProfileSerializer(serlizers.ModelSerializer):
     class Meta:
-        model = Profile
+        model = models.Profile
         fields = (
             'rank',
             'total_xp',
