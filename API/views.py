@@ -8,3 +8,9 @@ from rest_framework import generics
 class UserList(generics.ListAPIView):
     queryset = models.User.objects.all()
     serializer_class = serializers.UserSerializer
+
+
+class UserDetail(generics.RetrieveUpdateDestroyAPIView):
+    lookup_field = "id"
+    queryset = models.User.objects.all()
+    serializer_class = serializers.UserSerializer

@@ -19,12 +19,18 @@ class Profile(models.Model):
         on_delete=models.CASCADE,
         primary_key=True
         )
+
     total_xp = models.IntegerField(default=0)
     rank = models.IntegerField(choices=RANK_CHOICES, default=0)
     games_played = models.IntegerField(default=0)
     games_won = models.IntegerField(default=0)
     location = models.CharField(max_length=30, blank=True)
     joined = models.DateTimeField(auto_now_add=True)
+
+    def update(self, data):
+        (setattr(self, attr, val) for attr, val in data)
+        self.save()
+        return self
 
 
 @receiver(post_save, sender=User)
