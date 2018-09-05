@@ -27,11 +27,6 @@ class Profile(models.Model):
     location = models.CharField(max_length=30, blank=True)
     joined = models.DateTimeField(auto_now_add=True)
 
-    def update(self, data):
-        (setattr(self, attr, val) for attr, val in data)
-        self.save()
-        return self
-
 
 @receiver(post_save, sender=User)
 def create_user_profile(sender, instance, created, **kwargs):
@@ -42,3 +37,25 @@ def create_user_profile(sender, instance, created, **kwargs):
 @receiver(post_save, sender=User)
 def save_user_profile(sender, instance, **kwargs):
     instance.profile.save()
+
+
+class Game(models.Model):
+    finished_at = models.DateTimeField(auto_now_add=True)
+    user_1 = models.ForeignKey(
+            User,
+            on_delete='PROTECT',
+            related_name='user_1',
+            )
+    user_2 = models.ForeignKey(
+        User,
+        on_delete='PROTECT',
+        related_name='user_2'
+        )
+    user_1_rank = models.IntegerField(choices=Profile.RANK_CHOICES)
+    user_2_rank = models.IntegerField(choices=Profile.RANK_CHOICES)
+    winner = models.ForeignKey(
+        User,
+        on_delete='PROTECT',
+        related_name='winner')
+    user_1_xp_delta = models.IntegerField()
+    user_2_xp_delta = models.IntegerField()

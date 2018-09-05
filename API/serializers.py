@@ -20,13 +20,12 @@ class UserSerializer(serializers.ModelSerializer):
     profile = ProfileSerializer()
 
     class Meta:
-        model = User
+        model = models.User
         fields = ('username', 'email', 'profile')
 
     def update(self, instance, validated_data):
         profile_data = validated_data.pop('profile')
         profile = instance.profile
-        print(profile_data)
         for tuple in profile_data.items():
             attr = tuple[0]
             val = tuple[1]
@@ -38,3 +37,8 @@ class UserSerializer(serializers.ModelSerializer):
         instance.save()
 
         return instance
+
+
+class GameSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = models.Game
