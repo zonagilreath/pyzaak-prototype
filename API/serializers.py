@@ -40,5 +40,16 @@ class UserSerializer(serializers.ModelSerializer):
 
 
 class GameSerializer(serializers.ModelSerializer):
+
     class Meta:
         model = models.Game
+        fields = (
+            'finished_at',
+            'user_1',
+            'user_1_rank',
+            'user_2',
+            'user_2_rank',
+            'winner',
+            'user_1_xp_delta',
+            'user_2_xp_delta',
+            )
