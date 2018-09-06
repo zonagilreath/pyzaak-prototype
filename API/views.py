@@ -4,7 +4,6 @@ from . import serializers
 from rest_framework import generics
 
 
-# Create your views here.
 class UserList(generics.ListAPIView):
     queryset = models.User.objects.all()
     serializer_class = serializers.UserSerializer
@@ -19,3 +18,9 @@ class UserDetail(generics.RetrieveUpdateDestroyAPIView):
 class GameList(generics.ListAPIView):
     queryset = models.Game.objects.all()
     serializer_class = serializers.GameSerializer
+
+
+class SideDeckDetail(generics.RetrieveUpdateAPIView):
+    lookup_field = 'user'
+    queryset = models.SideDeck.objects.all()
+    serializer_class = serializers.SideDeckSerializer

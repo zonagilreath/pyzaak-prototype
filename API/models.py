@@ -19,7 +19,6 @@ class Profile(models.Model):
         on_delete=models.CASCADE,
         primary_key=True
         )
-
     total_xp = models.IntegerField(default=0)
     rank = models.IntegerField(choices=RANK_CHOICES, default=0)
     games_played = models.IntegerField(default=0)
@@ -59,3 +58,41 @@ class Game(models.Model):
         related_name='winner')
     user_1_xp_delta = models.IntegerField()
     user_2_xp_delta = models.IntegerField()
+
+
+class SideDeck(models.Model):
+    user = models.OneToOneField(
+        User,
+        on_delete=models.CASCADE,
+        primary_key=True,
+        related_name='side_deck'
+        )
+    plus_1 = models.IntegerField(default=1)
+    minus_1 = models.IntegerField(default=1)
+    bival_1 = models.IntegerField(default=0)
+    plus_2 = models.IntegerField(default=1)
+    minus_2 = models.IntegerField(default=1)
+    bival_2 = models.IntegerField(default=0)
+    plus_3 = models.IntegerField(default=0)
+    minus_3 = models.IntegerField(default=0)
+    bival_3 = models.IntegerField(default=0)
+    plus_4 = models.IntegerField(default=0)
+    minus_4 = models.IntegerField(default=0)
+    bival_4 = models.IntegerField(default=0)
+    plus_5 = models.IntegerField(default=0)
+    minus_5 = models.IntegerField(default=0)
+    bival_5 = models.IntegerField(default=0)
+    plus_6 = models.IntegerField(default=0)
+    minus_6 = models.IntegerField(default=0)
+    bival_6 = models.IntegerField(default=0)
+
+
+@receiver(post_save, sender=User)
+def create_user_side_deck(sender, instance, created, **kwargs):
+    if created:
+        SideDeck.objects.create(user=instance)
+
+
+@receiver(post_save, sender=User)
+def save_user_side_deck(sender, instance, **kwargs):
+    instance.side_deck.save()

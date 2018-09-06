@@ -40,16 +40,30 @@ class UserSerializer(serializers.ModelSerializer):
 
 
 class GameSerializer(serializers.ModelSerializer):
+    user_1_name = serializers.SerializerMethodField()
+    user_2_name = serializers.SerializerMethodField()
 
     class Meta:
         model = models.Game
         fields = (
             'finished_at',
-            'user_1',
+            'user_1_name',
             'user_1_rank',
-            'user_2',
+            'user_2_name',
             'user_2_rank',
             'winner',
             'user_1_xp_delta',
             'user_2_xp_delta',
             )
+
+    def get_user_1_name(self, obj):
+        return obj.user_1.username
+
+    def get_user_2_name(self, obj):
+        return obj.user_2.username
+
+
+class SideDeckSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = models.SideDeck
+        fields = '__all__'
