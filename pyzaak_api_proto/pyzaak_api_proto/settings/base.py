@@ -39,7 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'rest_framework',
     'rest_framework_swagger',
-    'pyzaak_api_proto.api',
+    'api',
 ]
 
 MIDDLEWARE = [
