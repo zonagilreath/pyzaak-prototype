@@ -8,6 +8,8 @@ django = "*"
 djangorestframework = "*"
 coreapi = "*"
 drf-yasg = "*"
+django-rest-swagger = "*"
+gunicorn = "*"
 
 [dev-packages]
 
