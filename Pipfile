@@ -10,6 +10,7 @@ coreapi = "*"
 drf-yasg = "*"
 django-rest-swagger = "*"
 gunicorn = "*"
+dj-database-url = "*"
 
 [dev-packages]
 
