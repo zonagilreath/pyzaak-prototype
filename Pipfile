@@ -12,6 +12,7 @@ django-rest-swagger = "*"
 gunicorn = "*"
 dj-database-url = "*"
 whitenoise = "*"
+"psycopg2" = "*"
 
 [dev-packages]
 
