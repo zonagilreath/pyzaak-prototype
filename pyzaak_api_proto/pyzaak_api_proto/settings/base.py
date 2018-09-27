@@ -44,7 +44,7 @@ ROOT_URLCONF = 'pyzaak_api_proto.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': ['pyzaak_api_proto/templates'],
+        'DIRS': [os.path.join(PROJECT_DIR, os.path.pardir, 'templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
