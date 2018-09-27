@@ -10,7 +10,7 @@ SECRET_KEY = 'll4d32qceg_naxgudgt6z44dy^gt(jmp-z%gmo#aasvqi(yvpn'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
