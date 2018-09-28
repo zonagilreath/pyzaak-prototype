@@ -15,8 +15,6 @@ class UserDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = models.User.objects.all()
     serializer_class = serializers.UserSerializer
     permission_classes = (IsOwnerOrReadOnly,)
-    #TODO find a way to assign ownership to profile to check against
-    #or figure out other way to limit permissions of authenticated users
 
 
 class GameList(generics.ListAPIView):
@@ -28,3 +26,4 @@ class SideDeckDetail(generics.RetrieveUpdateAPIView):
     lookup_field = 'user'
     queryset = models.SideDeck.objects.all()
     serializer_class = serializers.SideDeckSerializer
+    permission_classes = (IsOwnerOrReadOnly,)
