@@ -1,8 +1,8 @@
 from django.shortcuts import render
 from . import models
 from . import serializers
+from . import permissions
 from rest_framework import generics
-from api.permissions import IsOwnerOrReadOnly
 
 
 class UserList(generics.ListAPIView):
@@ -14,7 +14,7 @@ class UserDetail(generics.RetrieveUpdateDestroyAPIView):
     lookup_field = "id"
     queryset = models.User.objects.all()
     serializer_class = serializers.UserSerializer
-    permission_classes = (IsOwnerOrReadOnly,)
+    permission_classes = (permissions.IsUserOrReadOnly,)
 
 
 class GameList(generics.ListAPIView):
@@ -26,4 +26,4 @@ class SideDeckDetail(generics.RetrieveUpdateAPIView):
     lookup_field = 'user'
     queryset = models.SideDeck.objects.all()
     serializer_class = serializers.SideDeckSerializer
-    permission_classes = (IsOwnerOrReadOnly,)
+    permission_classes = (permissions.IsOwnerOrReadOnly,)
