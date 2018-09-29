@@ -9,7 +9,7 @@ urlpatterns = [
     path('user/<str:username>', views.UserDetail.as_view(), name='user_detail'),
     path('games', views.GameList.as_view(), name='game_list'),
     path(
-        'deck/<str:username>',
+        'deck/<int:user>',
         views.SideDeckDetail.as_view(),
         name='side_deck_detail'
         ),
