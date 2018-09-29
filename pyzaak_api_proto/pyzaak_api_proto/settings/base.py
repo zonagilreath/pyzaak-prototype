@@ -24,7 +24,6 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'rest_framework',
     'rest_framework_swagger',
-    'field_permissions',
     'api',
     'frontend',
 ]
@@ -91,11 +90,6 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-
-AUTHENTICATION_BACKENDS = [
-    'django.contrib.auth.backends.ModelBackend',  # keep this bad boy
-    'field_permissions.backends.InstancePermissionBackend',
-]
 
 LOGOUT_REDIRECT_URL = '/'
 

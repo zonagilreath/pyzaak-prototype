@@ -1,6 +1,5 @@
 from rest_framework import serializers
 from django.contrib.auth.models import User
-from field_permissions.api.rest_framework import FieldPermissionSerializerMixin
 from . import models
 
 
