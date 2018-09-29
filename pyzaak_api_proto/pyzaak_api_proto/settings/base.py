@@ -24,6 +24,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'rest_framework',
     'rest_framework_swagger',
+    'field_permissions',
     'api',
     'frontend',
 ]
@@ -90,15 +91,21 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+
+AUTHENTICATION_BACKENDS = [
+    'django.contrib.auth.backends.ModelBackend',  # keep this bad boy
+    'field_permissions.backends.InstancePermissionBackend',
+]
+
 LOGOUT_REDIRECT_URL = '/'
 
 # Set global default permissions
 
-REST_FRAMEWORK = {
-    'DEFAULT_PERMISSION_CLASSES': (
-        'rest_framework.permissions.IsAuthenticatedOrReadOnly',
-    )
-}
+# REST_FRAMEWORK = {
+#     'DEFAULT_PERMISSION_CLASSES': (
+#         'rest_framework.permissions.IsAuthenticatedOrReadOnly',
+#     )
+# }
 
 SWAGGER_SETTINGS = {
     'SECURITY_DEFINITIONS': {

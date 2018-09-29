@@ -1,5 +1,6 @@
 from rest_framework import serializers
 from django.contrib.auth.models import User
+from field_permissions.api.rest_framework import FieldPermissionSerializerMixin
 from . import models
 
 
@@ -11,9 +12,18 @@ class ProfileSerializer(serializers.ModelSerializer):
             'total_xp',
             'games_played',
             'games_won',
-            'joined'
+            'joined',
+            'location'
             )
         depth = 1
+        extra_kwargs = {
+            'rank': {'read_only': True},
+            'total_xp': {'read_only': True},
+            'games_played': {'read_only': True},
+            'games_won': {'read_only': True},
+            'joined': {'read_only': True},
+            'location': {'read_only': False}
+        }
 
 
 class UserSerializer(serializers.ModelSerializer):

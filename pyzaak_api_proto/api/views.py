@@ -11,10 +11,17 @@ class UserList(generics.ListAPIView):
 
 
 class UserDetail(generics.RetrieveUpdateDestroyAPIView):
-    lookup_field = "id"
+    lookup_field = "username"
     queryset = models.User.objects.all()
     serializer_class = serializers.UserSerializer
     permission_classes = (permissions.IsUserOrReadOnly,)
+
+
+# class UpdateProfile(generics.RetrieveUpdateAPIView):
+#     lookup_field = "id"
+#     queryset = models.User.objects.all()
+#     serializer_class = serializers.UserSerializer
+#     permission_classes = (permissions.IsUserOrReadOnly,)
 
 
 class GameList(generics.ListAPIView):

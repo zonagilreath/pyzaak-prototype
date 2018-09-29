@@ -6,6 +6,6 @@ from frontend import views
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/', include('api.urls')),
-    # path('', RedirectView.as_view(url='api/', permanent=True))
+    path('api-auth/', include('rest_framework.urls')),
     path('', include('frontend.urls'))
 ]
