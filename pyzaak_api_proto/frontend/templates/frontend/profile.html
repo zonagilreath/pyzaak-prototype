@@ -1,0 +1,70 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<br />
+<div class="row">
+    <div class="col-2">
+        <img src="{{ profile.image.url }}" class="img-fluid" />
+    </div>
+    <div class="col-10">
+        <h1>{{ user.username }}</h1>
+        <a>Edit profile</a>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-2">
+    </div>
+    <div class="col">
+        <p>Joined:</p>
+        <p>Games Played:</p>
+        <p>Games Won:</p>
+        <p>Rank:</p>
+        <p>Location:</p>
+    </div>
+    <div class="col">
+        <p>{{ profile.joined|date:'M j, Y' }}</p>
+        <p>{{ profile.games_played }}</p>
+        <p>{{ profile.games_won }}</p>
+        <p>{{ profile.get_rank_display }}</p>
+        <p>{{ profile.location|default:"Unavailable" }}</p>
+    </div>
+</div>
+<br />
+<div class="table-responsive">
+  <table class="table table-sm table-bordered">
+    <caption>{{ user.username }}'s Side Deck</caption>
+    <thead>
+      <tr>
+        <th>+1</th>
+        <th>-1</th>
+        <th>+/-1</th>
+        <th>+2</th>
+        <th>-2</th>
+        <th>+/-2</th>
+        <th>+3</th>
+        <th>-3</th>
+        <th>+/-3</th>
+        <th>+4</th>
+        <th>-4</th>
+        <th>+/-4</th>
+        <th>+5</th>
+        <th>-5</th>
+        <th>+/-5</th>
+        <th>+6</th>
+        <th>-6</th>
+        <th>+/-6</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        {% for field, value in deck.fields.items %}
+        <td>{{ value }}</td>
+        {% endfor %}
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+
+{% endblock %}

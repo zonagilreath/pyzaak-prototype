@@ -25,6 +25,7 @@ class Profile(models.Model):
     games_won = models.IntegerField(default=0)
     location = models.CharField(max_length=30, blank=True)
     joined = models.DateTimeField(auto_now_add=True)
+    image = models.ImageField(blank=True, upload_to='images/')
 
 
 @receiver(post_save, sender=User)
