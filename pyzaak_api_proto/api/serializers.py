@@ -12,7 +12,8 @@ class ProfileSerializer(serializers.ModelSerializer):
             'games_played',
             'games_won',
             'joined',
-            'location'
+            'location',
+            'image'
             )
         depth = 1
         extra_kwargs = {
@@ -21,7 +22,8 @@ class ProfileSerializer(serializers.ModelSerializer):
             'games_played': {'read_only': True},
             'games_won': {'read_only': True},
             'joined': {'read_only': True},
-            'location': {'read_only': False}
+            'location': {'read_only': False},
+            'image': {'read_only': False}
         }
 
 

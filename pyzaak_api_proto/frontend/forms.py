@@ -29,3 +29,11 @@ class SignUpForm(UserCreationForm):
             'password1',
             'password2',
             )
+
+
+class EditProfileForm(forms.ModelForm):
+    location = forms.CharField(required=False)
+
+    class Meta:
+        model = User
+        fields = ('username', 'email')

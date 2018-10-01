@@ -4,11 +4,13 @@
 <br />
 <div class="row">
     <div class="col-2">
+        {% if profile.image %}
         <img src="{{ profile.image.url }}" class="img-fluid" />
+        {% endif %}
     </div>
     <div class="col-10">
         <h1>{{ user.username }}</h1>
-        <a>Edit profile</a>
+        <a href="{% url 'edit_profile' %}">Edit profile</a>
     </div>
 </div>
 

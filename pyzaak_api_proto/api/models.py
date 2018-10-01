@@ -39,28 +39,6 @@ def save_user_profile(sender, instance, **kwargs):
     instance.profile.save()
 
 
-class Game(models.Model):
-    finished_at = models.DateTimeField(auto_now_add=True)
-    user_1 = models.ForeignKey(
-            User,
-            on_delete='PROTECT',
-            related_name='user_1',
-            )
-    user_2 = models.ForeignKey(
-        User,
-        on_delete='PROTECT',
-        related_name='user_2'
-        )
-    user_1_rank = models.IntegerField(choices=Profile.RANK_CHOICES)
-    user_2_rank = models.IntegerField(choices=Profile.RANK_CHOICES)
-    winner = models.ForeignKey(
-        User,
-        on_delete='PROTECT',
-        related_name='winner')
-    user_1_xp_delta = models.IntegerField()
-    user_2_xp_delta = models.IntegerField()
-
-
 class SideDeck(models.Model):
     user = models.OneToOneField(
         User,
@@ -105,3 +83,25 @@ def post_save_user_signal_handler(sender, instance, created, **kwargs):
         group = Group.objects.get(name='EndUser')
         instance.groups.add(group)
         instance.save()
+
+
+class Game(models.Model):
+    finished_at = models.DateTimeField(auto_now_add=True)
+    user_1 = models.ForeignKey(
+            User,
+            on_delete='PROTECT',
+            related_name='user_1',
+            )
+    user_2 = models.ForeignKey(
+        User,
+        on_delete='PROTECT',
+        related_name='user_2'
+        )
+    user_1_rank = models.IntegerField(choices=Profile.RANK_CHOICES)
+    user_2_rank = models.IntegerField(choices=Profile.RANK_CHOICES)
+    winner = models.ForeignKey(
+        User,
+        on_delete='PROTECT',
+        related_name='winner')
+    user_1_xp_delta = models.IntegerField()
+    user_2_xp_delta = models.IntegerField()

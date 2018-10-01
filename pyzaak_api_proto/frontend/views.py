@@ -4,7 +4,7 @@ from django.contrib.auth.decorators import login_required
 from django.core import serializers
 
 from api.models import Profile, SideDeck
-from .forms import SignUpForm
+from .forms import SignUpForm, EditProfileForm
 
 
 def home(request):
@@ -36,3 +36,23 @@ def profile(request):
                'profile': profile,
                'deck': deck}
     return render(request, 'frontend/profile.html', context)
+
+
+@login_required
+def edit_profile(request):
+    user = request.user
+    profile = Profile.objects.get(user=user)
+    if request.method == 'PUT':
+        form = EditProfileForm(request.PUT)
+        if form.is_valid():
+            profile.image = form.cleaned_data.pop('image')
+            profile.location = form.cleaned_data.pop('location')
+            profile.save()
+            form.save()
+            return redirect('profile')
+
+    deck = serializers.serialize("python",
+                                 [SideDeck.objects.get(user=user)])[0]
+    context = {'user': user,
+               'profile': profile}
+    return render(request, 'frontend/edit_profile.html', context)
