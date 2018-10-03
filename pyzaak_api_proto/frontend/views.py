@@ -12,7 +12,13 @@ from .forms import SignUpForm
 
 def home(request):
     games = Game.objects.all().order_by('-finished_at')
-    post = BlogPost.objects.latest('date_added')
+    try:
+        post = BlogPost.objects.latest('date_added')
+    except DoesNotExist:
+        post = {title: 'No Posts',
+                body: 'Add a post!',
+                created_by: '',
+                date_added: None}
     return render(request, 'frontend/home.html', {'games': games, 'post': post})
 
 
