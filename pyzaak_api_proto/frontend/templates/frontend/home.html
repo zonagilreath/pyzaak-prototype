@@ -1,7 +1,71 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<div>
-    Home!
+<div class="row pt-4">
+    <div class="col-10">
+        <h1>Pyzaak Prototype</h1>
+    </div>
 </div>
+<div class="row pt-4">
+    <div class="col-2">
+    </div>
+    <div class="col-8">
+        <h3>{{ post.title }}</h3>
+        <h5>By {{post.created_by}}, {{ post.date_added|date:'n/j/Y' }}</h5>
+        <p>{{ post.body }}</p>
+    </div>
+</div>
+<div class="row pt-4">
+    <div class="col-10 pb-2">
+        <h4>Recent Games</h4>
+    </div>
+    <div class="col-10 pb-6">
+        <table class="table table-dark">
+            <thead>
+                <tr>
+                    <th scope="col"></th>
+                    <th scope="col">Player 1</th>
+                    <th scope="col">P1 XP</th>
+                    <th scope="col">Player 2</th>
+                    <th scope="col">P2 XP</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for game in games %}
+                <tr>
+                    <td>
+                        {{ game.finished_at|date:'P n/j/Y' }}
+                    </td>
+                    <td>
+                        {{ game.user_1 }} ({{ game.get_user_1_rank_display }})
+                        }
+                        {% if game.winner == game.user_1 %}
+                        <p style="color:#66ff99">Winner!</p>
+                        {% endif %}
+                    </td>
+                    <td>
+                        {% if game.user_1_xp_delta > 0 %}
+                        +
+                        {% endif %}
+                        {{ game.user_1_xp_delta }}
+                    </td>
+                    <td>
+                        {{ game.user_2 }}({{ game.get_user_2_rank_display }})
+                        {% if game.winner == game.user_2 %}
+                        <p style="color:#66ff99">Winner!</p>
+                        {% endif %}
+                    </td>
+                    <td>
+                        {% if game.user_2_xp_delta > 0 %}
+                        +
+                        {% endif %}
+                        {{ game.user_2_xp_delta }}
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+
 {% endblock %}

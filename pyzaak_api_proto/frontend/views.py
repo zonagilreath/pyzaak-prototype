@@ -1,16 +1,19 @@
 from django.contrib.auth import login, authenticate
 from django.shortcuts import render, redirect
-from django.conf import settings
-from django.core.files.storage import FileSystemStorage
+# from django.conf import settings
+# from django.core.files.storage import FileSystemStorage
 from django.contrib.auth.decorators import login_required
 from django.core import serializers
 
-from api.models import Profile, SideDeck
-from .forms import SignUpForm, EditProfileForm
+from api.models import Profile, SideDeck, Game
+from .models import BlogPost
+from .forms import SignUpForm
 
 
 def home(request):
-    return render(request, 'frontend/home.html')
+    games = Game.objects.all().order_by('-finished_at')
+    post = BlogPost.objects.latest('date_added')
+    return render(request, 'frontend/home.html', {'games': games, 'post': post})
 
 
 def signup(request):
@@ -50,11 +53,11 @@ def profile(request):
 #             fs = FileSystemStorage()
 #             filename = fs.save(myfile.name, myfile)
 #             uploaded_file_url = fs.url(filename)
-        # profile.image = form.cleaned_data.pop('image')
-        # profile.location = form.cleaned_data.pop('location')
-        # profile.save()
-        # form.save()
-        # return redirect('profile')
+#         profile.image = form.cleaned_data.pop('image')
+#         profile.location = form.cleaned_data.pop('location')
+#         profile.save()
+#         form.save()
+#         return redirect('profile')
 
 #     deck = serializers.serialize("python",
 #                                  [SideDeck.objects.get(user=user)])[0]

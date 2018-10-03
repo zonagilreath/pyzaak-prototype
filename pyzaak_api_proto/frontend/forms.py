@@ -31,9 +31,10 @@ class SignUpForm(UserCreationForm):
             )
 
 
-class EditProfileForm(forms.ModelForm):
-    location = forms.CharField(required=False)
+# class EditProfileForm(forms.ModelForm):
+#     location = forms.CharField(required=False)
+#     image = forms.ImageField(required=False)
 
-    class Meta:
-        model = User
-        fields = ('username', 'email')
+#     class Meta:
+#         model = User
+#         fields = ('username', 'email')

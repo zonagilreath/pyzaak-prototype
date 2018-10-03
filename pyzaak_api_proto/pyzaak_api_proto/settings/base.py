@@ -93,13 +93,10 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LOGOUT_REDIRECT_URL = '/'
 
-# Set global default permissions
-
-# REST_FRAMEWORK = {
-#     'DEFAULT_PERMISSION_CLASSES': (
-#         'rest_framework.permissions.IsAuthenticatedOrReadOnly',
-#     )
-# }
+REST_FRAMEWORK = {
+    'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.LimitOffsetPagination',
+    'PAGE_SIZE': 10
+}
 
 SWAGGER_SETTINGS = {
     'SECURITY_DEFINITIONS': {
